@@ -5,7 +5,8 @@ import axios from "axios";
 
 const Form = () => {
     const [city, setCity] = useState("");
-    const getWeather = () => {
+    const getWeather = (e) => {
+    e.preventDefault();
         axios.get("https://api.weatherapi.com/v1/current.json?key=210b8e4818a4439694091142232207&q=London&aqi=no")
           .then(res => console.log(res))
     }
