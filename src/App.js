@@ -19,11 +19,11 @@ function App() {
         axios.get("https://api.weatherapi.com/v1/current.json?key=210b8e4818a4439694091142232207&q=London&aqi=no")
           .then(res => {
               setResults({
-                    country:"" ,
-                    cityName:"",
-                    temperature:"" ,
-                    conditionText:"" ,
-                    icon:""
+                    country: res.data.location.country ,
+                    cityName: res.data.location.name,
+                    temperature:res.data.current.temp_c ,
+                    conditionText: res.data.current.condition.text ,
+                    icon: res.data.current.condition.icon
                 })
           })
   }
@@ -31,7 +31,7 @@ function App() {
     <div className="test">
       <Title />
       <Form setCity={setCity} getWeather={getWeather} />
-      <Results />
+      <Results results={results} />
     </div>
   );
 }
