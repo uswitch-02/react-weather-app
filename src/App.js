@@ -3,6 +3,7 @@ import axios from "axios";
 import Title from "./components/Title";
 import Form from "./components/Form";
 import Results from "./components/Results";
+import Loading from "./components/Loading";
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   });
   const getWeather = (e) => {
     e.preventDefault();
+    setLoading(true);
         axios.get(`https://api.weatherapi.com/v1/current.json?key=210b8e4818a4439694091142232207&q=${city}&aqi=no`)
           .then(res => {
               setResults({
@@ -25,6 +27,8 @@ function App() {
                     conditionText: res.data.current.condition.text ,
                     icon: res.data.current.condition.icon
                 })
+                setCity("");
+                setLoading(false);
           })
           .catch(err => alert("エラーが発生しました。ページをリロードしてもう一度トライしてください。"));
   }
@@ -34,6 +38,7 @@ function App() {
         <Title />
         <Form setCity={setCity} getWeather={getWeather} />
         <Results results={results} />
+        {loading ? <Loading /> : <Results results={results} />}
       </div>
     </div>
   );
