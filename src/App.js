@@ -26,6 +26,7 @@ function App() {
                     icon: res.data.current.condition.icon
                 })
           })
+          .catch(err => alert("エラーが発生しました。ページをリロードしてもう一度トライしてください。"));
   }
   return (
     <div className="wrapper">
