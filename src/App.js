@@ -7,6 +7,7 @@ import Loading from "./components/Loading";
 import './App.css';
 
 function App() {
+  const [loading, setLoading] = useState(false)
   const [city, setCity] = useState("");
   const [results, setResults] = useState({
       country: "",
@@ -32,16 +33,15 @@ function App() {
           })
           .catch(err => alert("エラーが発生しました。ページをリロードしてもう一度トライしてください。"));
   }
-  return (
-    <div className="wrapper">
-      <div className="container">
-        <Title />
-        <Form setCity={setCity} getWeather={getWeather} />
-        <Results results={results} />
-        {loading ? <Loading /> : <Results results={results} />}
-      </div>
+return (
+  <div className="wrapper">
+    <div className="container">
+      <Title />
+      <Form setCity={setCity} getWeather={getWeather} city={city} />
+      {loading ? <Loading /> : <Results results={results} />}
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
